@@ -1,0 +1,39 @@
+{
+  "name": "doc-test-client",
+  "version": "0.1.0",
+  "description": "TODO: Better name",
+  "keywords": [],
+  "author": "Raynos <raynos2@gmail.com>",
+  "repository": "git://github.com/Raynos/doc-test-client.git",
+  "main": "index",
+  "homepage": "https://github.com/Raynos/doc-test-client",
+  "contributors": [
+    {
+      "name": "Jake Verbaten"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/Raynos/doc-test-client/issues",
+    "email": "raynos2@gmail.com"
+  },
+  "dependencies": {
+    "optimist": "~0.3.4",
+    "mkdirp": "~0.3.4",
+    "to-array": "~0.1.3",
+    "rimraf": "~2.0.2",
+    "composite": "~0.2.3",
+    "trycatch": "~0.1.0"
+  },
+  "devDependencies": {
+    "tap": "~0.3.1"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/Raynos/doc-test-client/raw/master/LICENSE"
+    }
+  ],
+  "scripts": {
+    "test": "tap --stderr --tap ./test"
+  }
+}
