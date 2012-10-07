@@ -2,6 +2,21 @@
 
 # Doc-test-client (In need of a better name!)
 
+A tool for generating HTML live examples from soure code.
+
+## The overview
+
+ - takes a javascript file
+ - generates a HTML page.
+ - Turns markdown in comments into HTML
+ - Prints little assertions based on `log` calls
+
+The main purpose of this tool is to enable literate programming
+with live feedback. Your write a program with comments and it's
+turned into a document with introspection tools embedded in it.
+
+## Installation and usage
+
 This file is generated from [a simple javascript file][1]
 
 To compile a file like that to run with doc-test-client just
