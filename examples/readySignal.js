@@ -1,5 +1,5 @@
 var Signal = require("ready-signal")
-    , log = require("..")
+    , log = require("../index")
 
 /*
 

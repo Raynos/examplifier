@@ -20,17 +20,28 @@ var argv = require("optimist").argv
 
 var program = composeAsync(domain
     , function createBundleWithInput(values, callback) {
-        var input = values[0]
+        var inputValue = values[0]
             , b = bundle()
-            , jsonString = JSON.stringify(input.toString())
-            , code = "module.exports = { src: " + jsonString + " }"
-            , target = "__raw-files__"
+            , jsonString = JSON.stringify(inputValue.toString())
+            , stateCode =
+                "module.exports = { \n" +
+                    "src: " + jsonString + "\n" +
+                "}"
+            , stateTarget = "__raw-files__"
+            , requireCode = "require(" + JSON.stringify(argv._[0]) + ")\n"
+            , requireTarget = "__require-files__"
 
-        b.files[target] = {
-            target: target
-            , body: code
+        b.files[stateTarget] = {
+            target: stateTarget
+            , body: stateCode
         }
 
+        b.files[requireTarget] = {
+            target: requireTarget
+            , body: requireCode
+        }
+
+        b.require(input)
         b.addEntry(path.join(assets, "index.js"))
 
         var text = b.bundle()

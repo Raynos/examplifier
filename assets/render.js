@@ -33,6 +33,7 @@ function renderComment(chunk) {
 
     return {
         root: root
+        , chunk: chunk
     }
 }
 
@@ -41,6 +42,7 @@ function renderCode(chunk) {
 
     return {
         root: root
+        , chunk: chunk
     }
 }
 
@@ -49,6 +51,7 @@ function renderCombination(chunk) {
         , children = []
         , widget = {
             root: container
+            , chunk: chunk
             , children: children
         }
 
@@ -69,13 +72,25 @@ function renderCombination(chunk) {
     return widget
 }
 
-// TODO
 function renderAssertion(chunk) {
     var widget = unpack(Element(assertionHtml))
 
-    widget.result.textContent = chunk.text
+    widget.setError = setError
+    widget.setCorrect = setCorrect
+    widget.chunk = chunk
 
     return widget
+
+    function setError(value) {
+        widget.result.textContent = ""
+        widget.error.textContent = "expected " + chunk.text +
+            " but got " + JSON.stringify(value)
+    }
+
+    function setCorrect(value) {
+        widget.error.textContent = ""
+        widget.result.textContent = JSON.stringify(value)
+    }
 }
 
 function markdown(text) {

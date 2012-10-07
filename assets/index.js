@@ -2,6 +2,9 @@ var state = require("__raw-files__")
     , source = state.src
     , esprima = require("esprima")
     , forEach = require("for-each")
+    , some = require("some-sync")
+    , EventEmitter = require("events").EventEmitter
+    , deepEqual = require("deep-equal")
 
     , astUtil = require("../lib/ast")
     , render = require("./render")
@@ -17,7 +20,7 @@ var state = require("__raw-files__")
         , range: true
     })
     , comments = ast.comments
-    , executionMap = {}
+    , assertions = state.assertions = new EventEmitter
 
 comments.forEach(function (comment) {
     comment.renderType = COMMENT
@@ -95,7 +98,7 @@ function isValidCombination(last, current) {
         (currentType === CODE || currentType === ASSERTION)
 }
 
-var widgets = chunks.map(function (chunk) {
+var components = chunks.map(function (chunk) {
     var widget = render(chunk)
 
     if (widget && widget.root) {
@@ -107,3 +110,37 @@ var widgets = chunks.map(function (chunk) {
 
     return widget
 })
+
+assertions.on("assert", function (assert) {
+    var name = assert.name
+        , value = assert.value
+        , component = some(components, findComponent)
+
+    // Should never happen?
+    if (!component) {
+        console.log("no component", assert)
+        return
+    }
+
+    var expected = component.chunk.assertionValue
+
+    if (deepEqual(expected, value)) {
+        component.setCorrect(value)
+    } else {
+        component.setError(value)
+    }
+
+    function findComponent(component, key) {
+        var chunk = component.chunk
+
+        if (chunk.renderType === ASSERTION &&
+            chunk.assertionText === name
+        ) {
+            return component
+        } else if (chunk.renderType === COMBINATION) {
+            return some(component.children, findComponent)
+        }
+    }
+})
+
+require("__require-files__")
