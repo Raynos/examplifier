@@ -6,6 +6,7 @@ var argv = require("optimist").argv
     , mkdirp = require("mkdirp")
     , fs = require("fs")
     , rimraf = require("rimraf")
+    , asyncMap = require("map-async")
     , Domain = require("domain").create
 
     , composeAsync = require("../lib/compose-async")
@@ -18,8 +19,9 @@ var argv = require("optimist").argv
     , assets = path.join(__dirname, "..", "assets")
 
 var program = composeAsync(domain
-    , function createBundleWithInput(input, callback) {
-        var b = bundle()
+    , function createBundleWithInput(values, callback) {
+        var input = values[0]
+            , b = bundle()
             , jsonString = JSON.stringify(input.toString())
             , code = "module.exports = { src: " + jsonString + " }"
             , target = "__raw-files__"
@@ -34,21 +36,21 @@ var program = composeAsync(domain
         var text = b.bundle()
         fs.writeFile(path.join(output, "bundle.js"), text, callback)
     }
-    , function getInputFile(callback) {
-        fs.readFile(input, callback)
-    }
-    , function writeCss(callback) {
-        fs.createReadStream(path.join(assets, "readable.css"))
-            .pipe(fs.createWriteStream(path.join(output, "readable.css")))
-            .on("close", callback)
-    }
     , function writeIndexHtml(p, callback) {
-        var inputPath = path.join(assets, "index.html")
-            , outputPath = path.join(output, "index.html")
+        asyncMap([
+            "input"
+            , "index.html"
+            , "readable.css"
+            , "assertion.css"
+        ], function (value, callback) {
+            if (value === "input") {
+                return fs.readFile(input, callback)
+            }
 
-        fs.createReadStream(inputPath)
-            .pipe(fs.createWriteStream(outputPath))
-            .on("close", callback)
+            fs.createReadStream(path.join(assets, value))
+                .pipe(fs.createWriteStream(path.join(output, value)))
+                .on("close", callback)
+        }, callback)
     }
     , function createOutputDir(callback) {
         mkdirp(output, callback)

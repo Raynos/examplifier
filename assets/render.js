@@ -4,6 +4,7 @@ var classList = require("class-list")
     , highlight = require("highlight.js")
     , Element = Fragment.Element
     , unpack = require("unpack-element")
+    , walk = require("dom-walk")
 
     , assertionHtml = require("./assertion.html")
 
@@ -13,6 +14,7 @@ var classList = require("class-list")
         , CODE: 2
         , COMBINATION: 3
     }
+    , TEXT_NODE = 3
 
 render.RENDER_TYPE = RENDER_TYPE
 render[RENDER_TYPE.COMMENT] = renderComment
@@ -68,8 +70,10 @@ function renderCombination(chunk) {
 }
 
 // TODO
-function renderAssertion() {
+function renderAssertion(chunk) {
     var widget = unpack(Element(assertionHtml))
+
+    widget.result.textContent = chunk.text
 
     return widget
 }

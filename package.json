@@ -32,7 +32,9 @@
     "highlight.js": "~7.2.0",
     "some": "~0.1.0",
     "class-list": "0.0.1",
-    "unpack-element": "~0.1.0"
+    "unpack-element": "~0.1.0",
+    "map-async": "~0.1.0",
+    "dom-walk": "0.0.1"
   },
   "devDependencies": {
     "tap": "~0.3.1",

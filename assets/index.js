@@ -105,7 +105,5 @@ var widgets = chunks.map(function (chunk) {
             , "render", render)
     }
 
-
-
     return widget
 })
