@@ -102,7 +102,11 @@ function markdown(text) {
         , pedantic: false
         , sanitized: true
         , highlight: function (code, lang) {
-            return highlight.highlight("javascript", code).value
+            if (lang === "js") {
+                return highlight.highlight("javascript", code).value
+            }
+
+            return highlight.highlightAuto(code).value
         }
     })
 }

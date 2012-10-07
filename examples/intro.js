@@ -72,7 +72,7 @@ call.
 
 Example:
 
-```
+``` js
 log("uid", 20)
 // 22
 

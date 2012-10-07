@@ -216,7 +216,17 @@ pre.code-snippet code
     padding:.5em;
 }
 
-pre.code-snippet .tag,pre .tag .title,pre .keyword,pre .literal,pre .change,pre .winutils,pre .flow,pre .lisp .title,pre .clojure .built_in,pre .nginx .title,pre .tex .special
+pre.code-snippet .tag
+  , pre.code-snippet .tag .title
+  , pre.code-snippet .keyword
+  , pre.code-snippet .literal
+  , pre.code-snippet .change
+  , pre.code-snippet .winutils
+  , pre.code-snippet .flow
+  , pre.code-snippet .lisp .title
+  , pre.code-snippet .clojure .built_in
+  , pre.code-snippet .nginx .title
+  , pre.code-snippet .tex .special
 {
     color:#f92672;
 }
@@ -231,27 +241,85 @@ pre.code-snippet .class .title
     color:#FFF;
 }
 
-pre.code-snippet .attribute,pre .symbol,pre .symbol .string,pre .value,pre .regexp
+pre.code-snippet .attribute
+  , pre.code-snippet .symbol
+  , pre.code-snippet .symbol .string
+  , pre.code-snippet .value
+  , pre.code-snippet .regexp
 {
     color:#bf79db;
 }
 
-pre.code-snippet .tag .value,pre .string,pre .ruby .subst,pre .title,pre .haskell .type,pre .preprocessor,pre .ruby .class .parent,pre .built_in,pre .sql .aggregate,pre .django .template_tag,pre .django .variable,pre .smalltalk .class,pre .javadoc,pre .django .filter .argument,pre .smalltalk .localvars,pre .smalltalk .array,pre .attr_selector,pre .pseudo,pre .addition,pre .stream,pre .envvar,pre .apache .tag,pre .apache .cbracket,pre .tex .command,pre .input_number
+pre.code-snippet .tag .value
+  , pre.code-snippet .string
+  , pre.code-snippet .ruby .subst
+  , pre.code-snippet .title
+  , pre.code-snippet .haskell .type
+  , pre.code-snippet .preprocessor
+  , pre.code-snippet .ruby .class .parent
+  , pre.code-snippet .built_in
+  , pre.code-snippet .sql .aggregate
+  , pre.code-snippet .django .template_tag
+  , pre.code-snippet .django .variable
+  , pre.code-snippet .smalltalk .class
+  , pre.code-snippet .javadoc
+  , pre.code-snippet .django .filter .argument
+  , pre.code-snippet .smalltalk .localvars
+  , pre.code-snippet .smalltalk .array
+  , pre.code-snippet .attr_selector
+  , pre.code-snippet .pseudo
+  , pre.code-snippet .addition
+  , pre.code-snippet .stream
+  , pre.code-snippet .envvar
+  , pre.code-snippet .apache .tag
+  , pre.code-snippet .apache .cbracket
+  , pre.code-snippet .tex .command
+  , pre.code-snippet .input_number
 {
     color:#a6e22e;
 }
 
-pre.code-snippet .comment,pre .java .annotation,pre .python .decorator,pre .template_comment,pre .pi,pre .doctype,pre .deletion,pre .shebang,pre .apache .sqbracket,pre .tex .formula
+pre.code-snippet .comment
+, pre.code-snippet .java .annotation
+, pre.code-snippet .python .decorator
+, pre.code-snippet .template_comment
+, pre.code-snippet .pi
+, pre.code-snippet .doctype
+, pre.code-snippet .deletion
+, pre.code-snippet .shebang
+, pre.code-snippet .apache .sqbracket
+, pre.code-snippet .tex .formula
 {
     color:#75715e;
 }
 
-pre.code-snippet .keyword,pre .literal,pre .css .id,pre .phpdoc,pre .title,pre .haskell .type,pre .vbscript .built_in,pre .sql .aggregate,pre .rsl .built_in,pre .smalltalk .class,pre .diff .header,pre .chunk,pre .winutils,pre .bash .variable,pre .apache .tag,pre .tex .special,pre .request,pre .status
+pre.code-snippet .keyword
+, pre.code-snippet .literal
+, pre.code-snippet .css .id
+, pre.code-snippet .phpdoc
+, pre.code-snippet .title
+, pre.code-snippet .haskell .type
+, pre.code-snippet .vbscript .built_in
+, pre.code-snippet .sql .aggregate
+, pre.code-snippet .rsl .built_in
+, pre.code-snippet .smalltalk .class
+, pre.code-snippet .diff .header
+, pre.code-snippet .chunk
+, pre.code-snippet .winutils
+, pre.code-snippet .bash .variable
+, pre.code-snippet .apache .tag
+, pre.code-snippet .tex .special
+, pre.code-snippet .request
+, pre.code-snippet .status
 {
     font-weight:700;
 }
 
-pre.code-snippet .coffeescript .javascript,pre .xml .css,pre .xml .javascript,pre .xml .vbscript,pre .tex .formula
+pre.code-snippet .coffeescript .javascript
+, pre.code-snippet .xml .css
+, pre.code-snippet .xml .javascript
+, pre.code-snippet .xml .vbscript
+, pre.code-snippet .tex .formula
 {
     opacity:.5;
 }
