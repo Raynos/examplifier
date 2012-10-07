@@ -18,14 +18,25 @@
   },
   "dependencies": {
     "optimist": "~0.3.4",
+    "esprima": "git://github.com/ariya/esprima.git",
     "mkdirp": "~0.3.4",
     "to-array": "~0.1.3",
     "rimraf": "~2.0.2",
     "composite": "~0.2.3",
-    "trycatch": "~0.1.0"
+    "trycatch": "~0.1.0",
+    "ap": "~0.1.0",
+    "browserify": "~1.16.1",
+    "for-each": "~0.1.0",
+    "marked": "~0.2.5",
+    "fragment": "~0.3.0",
+    "highlight.js": "~7.2.0",
+    "some": "~0.1.0",
+    "class-list": "0.0.1",
+    "unpack-element": "~0.1.0"
   },
   "devDependencies": {
-    "tap": "~0.3.1"
+    "tap": "~0.3.1",
+    "ready-signal": "~0.1.0"
   },
   "licenses": [
     {

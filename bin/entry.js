@@ -1,34 +1,60 @@
 #! /usr/bin/env node
 
 var argv = require("optimist").argv
-    , trycatch = require("trycatch")
+    // , trycatch = require("trycatch")
     , path = require("path")
     , mkdirp = require("mkdirp")
     , fs = require("fs")
-    , toArray = require("to-array")
     , rimraf = require("rimraf")
-    , composeAsync = require("composite").async
     , Domain = require("domain").create
+
+    , composeAsync = require("../lib/compose-async")
+    , bundle = require("../lib/bundle")
 
     , cwd = process.cwd()
     , output = path.join(cwd, argv.out)
     , input = path.join(cwd, argv._[0])
     , domain = Domain()
+    , assets = path.join(__dirname, "..", "assets")
 
-var program = composeAsyncWithThrown(
-    function (p, callback) {
-        var inputPath = path.join(__dirname, "..", "assets", "index.html")
+var program = composeAsync(domain
+    , function createBundleWithInput(input, callback) {
+        var b = bundle()
+            , jsonString = JSON.stringify(input.toString())
+            , code = "module.exports = { src: " + jsonString + " }"
+            , target = "__raw-files__"
+
+        b.files[target] = {
+            target: target
+            , body: code
+        }
+
+        b.addEntry(path.join(assets, "index.js"))
+
+        var text = b.bundle()
+        fs.writeFile(path.join(output, "bundle.js"), text, callback)
+    }
+    , function getInputFile(callback) {
+        fs.readFile(input, callback)
+    }
+    , function writeCss(callback) {
+        fs.createReadStream(path.join(assets, "readable.css"))
+            .pipe(fs.createWriteStream(path.join(output, "readable.css")))
+            .on("close", callback)
+    }
+    , function writeIndexHtml(p, callback) {
+        var inputPath = path.join(assets, "index.html")
             , outputPath = path.join(output, "index.html")
 
         fs.createReadStream(inputPath)
             .pipe(fs.createWriteStream(outputPath))
             .on("close", callback)
     }
-    , function (callback) {
-        mkdirp(this.output, callback)
+    , function createOutputDir(callback) {
+        mkdirp(output, callback)
     }
-    , function (callback) {
-        rimraf(this.output, callback)
+    , function cleanOutputDir(callback) {
+        rimraf(output, callback)
     }
 )
 
@@ -37,26 +63,6 @@ domain.on("error", function (err) {
     throw err
 })
 
-program.call({
-    output: output
-}, function () {
+program(function () {
     console.log("done")
 })
-
-function composeAsyncWithThrown() {
-    var args = toArray(arguments)
-        .map(function (f) {
-            return function () {
-                var args = toArray(arguments)
-                    , cb = args[args.length - 1]
-
-                if (typeof cb === "function") {
-                    args[args.length - 1] = domain.intercept(cb)
-                }
-
-                return f.apply(this, args)
-            }
-        })
-
-    return composeAsync.apply(null, args)
-}

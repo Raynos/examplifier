@@ -1,2 +1,2 @@
 run:
-	node ./bin/entry.js --out=doc index.js
+	node ./bin/entry.js --out=doc ./examples/readySignal.js
