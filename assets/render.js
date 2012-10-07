@@ -40,6 +40,8 @@ function renderComment(chunk) {
 function renderCode(chunk) {
     var root = Element(markdown("``` js\n" + chunk.text + "\n```"))
 
+    classList(root).add("code-snippet")
+
     return {
         root: root
         , chunk: chunk
@@ -56,6 +58,7 @@ function renderCombination(chunk) {
         }
 
     classList(container).add("combination-container")
+    classList(container).add("code-snippet")
 
     chunk.children.forEach(function (chunk) {
         var widget = render(chunk)

@@ -1,0 +1,257 @@
+/* readable.css */
+
+body {
+    width: 50em;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Palatino,Georgia,"Times New Roman",Times,serif;
+    font-size: 16px;
+    line-height: 1.4em;
+    color: #282828;
+    word-spacing: -0.05em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-rendering: optimizelegibility;
+    font-weight: bold;
+    margin: 0.7em 0;
+}
+
+h1, h2, h3 {
+    line-height: 40px;
+}
+
+h4, h5, h6 {
+    line-height: 20px;
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+h3 {
+    font-size: 1.5em;
+}
+
+h4 {
+    font-size: 18px;
+}
+
+h5 {
+    font-size: 14px;
+}
+
+h6 {
+    font-size: 12px;
+}
+
+a {
+    color: #9C0001;
+}
+
+a:hover {
+    color: #C50001;
+}
+
+blockquote {
+  margin-left: 25px;
+  padding-left: 15px;
+  border-left: 3px solid #ccc;
+}
+
+code {
+    width: 800px;
+}
+
+/* assertions.js */
+
+.correct-assertion {
+    color: green;
+}
+
+.error-assertion {
+    color: red;
+}
+
+.assertion-code {
+    white-space: normal
+}
+
+/* color coding for inline pre's */
+
+
+pre code {
+  display: block; padding: 0.5em;
+  color: #333;
+  background: #f8f8ff
+}
+
+pre .comment,
+pre .template_comment,
+pre .diff .header,
+pre .javadoc {
+  color: #998;
+  font-style: italic
+}
+
+pre .keyword,
+pre .css .rule .keyword,
+pre .winutils,
+pre .javascript .title,
+pre .nginx .title,
+pre .subst,
+pre .request,
+pre .status {
+  color: #333;
+  font-weight: bold
+}
+
+pre .number,
+pre .hexcolor,
+pre .ruby .constant {
+  color: #099;
+}
+
+pre .string,
+pre .tag .value,
+pre .phpdoc,
+pre .tex .formula {
+  color: #d14
+}
+
+pre .title,
+pre .id {
+  color: #900;
+  font-weight: bold
+}
+
+pre .javascript .title,
+pre .lisp .title,
+pre .clojure .title,
+pre .subst {
+  font-weight: normal
+}
+
+pre .class .title,
+pre .haskell .type,
+pre .vhdl .literal,
+pre .tex .command {
+  color: #458;
+  font-weight: bold
+}
+
+pre .tag,
+pre .tag .title,
+pre .rules .property,
+pre .django .tag .keyword {
+  color: #000080;
+  font-weight: normal
+}
+
+pre .attribute,
+pre .variable,
+pre .lisp .body {
+  color: #008080
+}
+
+pre .regexp {
+  color: #009926
+}
+
+pre .class {
+  color: #458;
+  font-weight: bold
+}
+
+pre .symbol,
+pre .ruby .symbol .string,
+pre .lisp .keyword,
+pre .tex .special,
+pre .input_number {
+  color: #990073
+}
+
+pre .built_in,
+pre .lisp .title,
+pre .clojure .built_in {
+  color: #0086b3
+}
+
+pre .preprocessor,
+pre .pi,
+pre .doctype,
+pre .shebang,
+pre .cdata {
+  color: #999;
+  font-weight: bold
+}
+
+pre .deletion {
+  background: #fdd
+}
+
+pre .addition {
+  background: #dfd
+}
+
+pre .diff .change {
+  background: #0086b3
+}
+
+pre .chunk {
+  color: #aaa
+}
+
+/* color coding for code snippets. Taken from highlight.js */
+
+pre.code-snippet code
+{
+    background:#272822;
+    color:#DDD;
+    display:block;
+    padding:.5em;
+}
+
+pre.code-snippet .tag,pre .tag .title,pre .keyword,pre .literal,pre .change,pre .winutils,pre .flow,pre .lisp .title,pre .clojure .built_in,pre .nginx .title,pre .tex .special
+{
+    color:#f92672;
+}
+
+pre.code-snippet code .constant
+{
+    color:#66d9ef;
+}
+
+pre.code-snippet .class .title
+{
+    color:#FFF;
+}
+
+pre.code-snippet .attribute,pre .symbol,pre .symbol .string,pre .value,pre .regexp
+{
+    color:#bf79db;
+}
+
+pre.code-snippet .tag .value,pre .string,pre .ruby .subst,pre .title,pre .haskell .type,pre .preprocessor,pre .ruby .class .parent,pre .built_in,pre .sql .aggregate,pre .django .template_tag,pre .django .variable,pre .smalltalk .class,pre .javadoc,pre .django .filter .argument,pre .smalltalk .localvars,pre .smalltalk .array,pre .attr_selector,pre .pseudo,pre .addition,pre .stream,pre .envvar,pre .apache .tag,pre .apache .cbracket,pre .tex .command,pre .input_number
+{
+    color:#a6e22e;
+}
+
+pre.code-snippet .comment,pre .java .annotation,pre .python .decorator,pre .template_comment,pre .pi,pre .doctype,pre .deletion,pre .shebang,pre .apache .sqbracket,pre .tex .formula
+{
+    color:#75715e;
+}
+
+pre.code-snippet .keyword,pre .literal,pre .css .id,pre .phpdoc,pre .title,pre .haskell .type,pre .vbscript .built_in,pre .sql .aggregate,pre .rsl .built_in,pre .smalltalk .class,pre .diff .header,pre .chunk,pre .winutils,pre .bash .variable,pre .apache .tag,pre .tex .special,pre .request,pre .status
+{
+    font-weight:700;
+}
+
+pre.code-snippet .coffeescript .javascript,pre .xml .css,pre .xml .javascript,pre .xml .vbscript,pre .tex .formula
+{
+    opacity:.5;
+}

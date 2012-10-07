@@ -51,8 +51,7 @@ var program = composeAsync(domain
         asyncMap([
             "input"
             , "index.html"
-            , "readable.css"
-            , "assertion.css"
+            , "style.css"
         ], function (value, callback) {
             if (value === "input") {
                 return fs.readFile(input, callback)
