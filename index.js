@@ -1,10 +1,14 @@
 var assertions = require("__raw-files__").assertions
+    , stacktrace = require("stacktrace-js")
 
 module.exports = log
 
-function log(name, value) {
+function log(value) {
+    var stack = stacktrace()
+        , line = stack[4].split(":")[1]
+
     assertions.emit("assert", {
-        name: name
-        , value: value
+        value: value
+        , line: +line
     })
 }

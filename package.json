@@ -40,7 +40,9 @@
     "wr": "~1.2.1",
     "live-reload": "~0.1.1",
     "http-server": "~0.5.1",
-    "xtend": "~1.0.3"
+    "xtend": "~1.0.3",
+    "stacktrace-js": "git://github.com/Raynos/javascript-stacktrace.git#patch-1",
+    "some-sync": "~0.1.0"
   },
   "devDependencies": {
     "tap": "~0.3.1",

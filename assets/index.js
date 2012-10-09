@@ -150,7 +150,7 @@ function handleSource(source) {
     assertions.on("assert", handleAssert)
 
     function handleAssert(assert) {
-        var name = assert.name
+        var line = assert.line
             , value = assert.value
             , component = some(components, findComponent)
 
@@ -172,7 +172,7 @@ function handleSource(source) {
             var chunk = component.chunk
 
             if (chunk.renderType === ASSERTION &&
-                chunk.assertionText === name
+                chunk.loc.start.line === line
             ) {
                 return component
             } else if (chunk.renderType === COMBINATION) {

@@ -54,7 +54,7 @@ it locally using `"../index"` instead of `"doc-test-client"`)
 
 var log = require("../index")
 
-log("1", typeof log)
+log(typeof log)
 // "function"
 
 /*
@@ -69,7 +69,7 @@ message in red
   [1]: https://github.com/Raynos/doc-test-client/tree/master/examples/intro.js
 */
 
-log("2", 4 + 6)
+log(4 + 6)
 // 11
 
 
@@ -97,10 +97,10 @@ log("uid2", typeof "foo")
 
 */
 
-log("uid", 20)
+log(20)
 // 22
 
-log("uid2", typeof "foo")
+log(typeof "foo")
 // "string"
 
 /*
@@ -110,7 +110,7 @@ Asynchronous logging works as well
 */
 
 setTimeout(function () {
-    log("3", "totally works")
+    log("totally works")
     // "totally works"
 }, 10000)
 
