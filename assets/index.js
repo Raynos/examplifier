@@ -53,6 +53,8 @@ function handleSource(source) {
         }
     })
 
+    console.log('body', body)
+
     astUtil.walk({ body: body }, function (node, parent) {
         if (node.type !== "CallExpression") {
             return
@@ -86,9 +88,16 @@ function handleSource(source) {
                 if (last.renderType === COMBINATION) {
                     last.children.push(current)
                     last.loc.end = current.loc.end
-                    last.range[1] = current.range[1]
+                    if (current.range[1] > last.range[1]) {
+                        last.range[1] = current.range[1]
+                    }
                 } else {
                     list.pop()
+                    var greater = last.range[1]
+                    if (current.range[1] > greater) {
+                        greater = current.range[1]
+                    }
+
                     list.push({
                         type: "CombinationNode"
                         , children: [last, current]
@@ -96,7 +105,7 @@ function handleSource(source) {
                             start: last.loc.start
                             , end: current.loc.end
                         }
-                        , range: [last.range[0], current.range[1]]
+                        , range: [last.range[0], greater]
                         , renderType: COMBINATION
                     })
                 }
