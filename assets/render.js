@@ -56,9 +56,10 @@ function renderCode(chunk) {
 
 function renderCombination(chunk) {
     var container = document.createElement("pre")
+        , wrapper = document.createElement("div")
         , children = []
         , widget = extend(new EventEmitter(), {
-            root: container
+            root: wrapper
             , chunk: chunk
             , children: children
         })
@@ -78,13 +79,27 @@ function renderCombination(chunk) {
         container.appendChild(root)
     })
 
-    container.addEventListener("dblclick", function (ev) {
+    var edit = document.createElement("button")
+    edit.textContent = "edit"
+    edit.addEventListener("click", aceItUp)
+
+    container.addEventListener("dblclick", aceItUp)
+
+    wrapper.appendChild(container)
+    wrapper.appendChild(edit)
+
+    return widget
+
+    function aceItUp(ev) {
         //container.style.left = container.offsetLeft + "px"
         //container.style.top = container.offsetTop + "px"
         var div = document.createElement("div")
             , rect = container.getBoundingClientRect()
             , source = state.src.substring(chunk.range[0], chunk.range[1])
+            , save = document.createElement("button")
 
+        save.textContent = "save"
+        edit.parentNode.removeChild(edit)
         div.textContent = source
 
         div.style.width = rect.width + "px"
@@ -108,13 +123,15 @@ function renderCombination(chunk) {
             , exec: handleSave
         })
 
+        wrapper.appendChild(save)
+
+        save.addEventListener("click", handleSave)
+
         function handleSave() {
             var updatedSource = editor.getValue()
             widget.emit("source", updatedSource)
         }
-    })
-
-    return widget
+    }
 }
 
 function renderAssertion(chunk) {
