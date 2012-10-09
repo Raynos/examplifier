@@ -1,15 +1,16 @@
 /*
 
-# Doc-test-client (In need of a better name!)
+# Examplifier
 
-A tool for generating HTML live examples from soure code.
+Turn bland source code into interactive demos
 
 ## The overview
 
  - takes a javascript file
- - generates a HTML page.
- - Turns markdown in comments into HTML
- - Prints little assertions based on `log` calls
+ - generates interactive demos
+     - Turns embedded markdown in comments into HTML
+     - Clever result printing with `log`
+     - All code snippets are live editable.
 
 The main purpose of this tool is to enable literate programming
 with live feedback. Your write a program with comments and it's
@@ -22,20 +23,20 @@ This file is generated from [a simple javascript file][1]
 To compile a file like that to run with doc-test-client just
 
 ```
-$ npm install doc-test-client
-$ doc-test-client --out=./path/to/out/dir ./path/to/file
+$ npm install examplifier
+$ examplifier --out=./path/to/out/dir ./path/to/file
 ```
 
 Then go into the output folder and open the index.html
 
-  [1]: https://github.com/Raynos/doc-test-client/tree/master/examples/intro.js
+  [1]: https://github.com/Raynos/examplifier/tree/master/examples/intro.js
 */
 
 /*
 
 ## The pretty markdown
 
-`doc-test-client` generates a nice index.html file that
+`examplifier` generates a nice index.html file that
 creates a HTML document that looks like markdown but is based
 on the source code.
 
@@ -45,16 +46,14 @@ on the source code.
 
 ## The `log` function
 
-doc-test gives you a log function.
+examplifier gives you a log function.
 
-(Since this file your looking at is executable we have to require
-it locally using `"../index"` instead of `"doc-test-client"`)
-
+(Requiring ../index instead of examplifier as this is a local example)
 */
 
 var log = require("../index")
 
-log(typeof log)
+log("1", typeof log)
 // "function"
 
 /*
@@ -66,12 +65,22 @@ is being executed and we are comparing `typeof log` with the value
 If we were to make a comparison that is wrong it would print an error
 message in red
 
-  [1]: https://github.com/Raynos/doc-test-client/tree/master/examples/intro.js
+  [1]: https://github.com/Raynos/examplifier/tree/master/examples/intro.js
 */
 
-log(4 + 6)
+log("2", 4 + 6)
 // 11
 
+/*
+
+# Live Editing
+
+Red sucks! We should fix that.
+
+**Double click** the code above and edit the statement to log 11 instead.
+Then hit **Ctrl+S (or Cmd+S)** to save the changes
+
+*/
 
 /*
 
@@ -85,6 +94,9 @@ The second `value` parameter is what ever value you want to check
 againsts the expected value that is commented below the `log`
 call.
 
+You can also call `log(value)` and it will guess the comment location
+using stack trace magickery. This is only known to work in chrome.
+
 Example:
 
 ``` js
@@ -97,24 +109,24 @@ log("uid2", typeof "foo")
 
 */
 
-log(20)
+log("uid", 20)
 // 22
 
-log(typeof "foo")
+log("uid2", typeof "foo")
 // "string"
 
 /*
+
+Another red error. Edit and fix it!
 
 Asynchronous logging works as well
 
 */
 
 setTimeout(function () {
-    log("totally works")
+    log("3", "totally works")
     // "totally works"
 }, 10000)
-
-module.exports = {}
 
 /*
 

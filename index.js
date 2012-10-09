@@ -3,12 +3,18 @@ var assertions = require("__raw-files__").assertions
 
 module.exports = log
 
-function log(value) {
+function log(name, value) {
     var stack = stacktrace()
         , line = stack[4].split(":")[1]
 
+    if (arguments.length === 1) {
+        value = name
+        name = null
+    }
+
     assertions.emit("assert", {
         value: value
+        , name: name
         , line: +line
     })
 }

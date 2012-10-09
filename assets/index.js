@@ -62,14 +62,14 @@ function handleSource(source) {
             return
         }
 
-        var text = node.arguments[0].value
+        var name = node.arguments[0].value
             , comment = astUtil.getComment(node, comments)
 
         if (comment) {
             var value = astUtil.getCommentValue(comment)
             comment.renderType = ASSERTION
             comment.assertionValue = value
-            comment.assertionText = text
+            comment.assertionName = name
         }
     })
 
@@ -151,6 +151,7 @@ function handleSource(source) {
 
     function handleAssert(assert) {
         var line = assert.line
+            , name = assert.name
             , value = assert.value
             , component = some(components, findComponent)
 
@@ -162,22 +163,33 @@ function handleSource(source) {
 
         var expected = component.chunk.assertionValue
 
-        if (deepEqual(expected, value)) {
-            component.setCorrect(value)
-        } else {
+        if (!(isLiteral(value) && expected === value) ||
+            !deepEqual(expected, value)
+        ) {
             component.setError(value)
+        } else {
+            component.setCorrect(value)
         }
 
         function findComponent(component, key) {
             var chunk = component.chunk
 
             if (chunk.renderType === ASSERTION &&
-                chunk.loc.start.line === line
+                (chunk.loc.start.line === line ||
+                chunk.assertionName === name)
             ) {
                 return component
             } else if (chunk.renderType === COMBINATION) {
                 return some(component.children, findComponent)
             }
+        }
+
+        function isLiteral(value) {
+            return typeof value === "number" ||
+                typeof value === "string" ||
+                typeof value === "boolean" ||
+                value === undefined ||
+                value === null
         }
     }
 
