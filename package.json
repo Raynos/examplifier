@@ -35,11 +35,18 @@
     "unpack-element": "~0.1.0",
     "map-async": "~0.1.0",
     "dom-walk": "0.0.1",
-    "deep-equal": "0.0.0"
+    "deep-equal": "0.0.0",
+    "map-sync": "~0.1.0",
+    "wr": "~1.2.1",
+    "live-reload": "~0.1.1",
+    "http-server": "~0.5.1",
+    "xtend": "~1.0.3"
   },
   "devDependencies": {
     "tap": "~0.3.1",
-    "ready-signal": "~0.1.0"
+    "ready-signal": "~0.1.0",
+    "supervisor": "~0.4.1",
+    "wr": "~1.2.1"
   },
   "licenses": [
     {

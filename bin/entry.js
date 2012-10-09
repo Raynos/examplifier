@@ -26,19 +26,13 @@ var program = composeAsync(domain
             , stateCode =
                 "module.exports = { \n" +
                     "src: " + jsonString + "\n" +
+                    ", uri: " + JSON.stringify(argv._[0].substr(1)) + "\n" +
                 "}"
             , stateTarget = "__raw-files__"
-            , requireCode = "require(" + JSON.stringify(argv._[0]) + ")\n"
-            , requireTarget = "__require-files__"
 
         b.files[stateTarget] = {
             target: stateTarget
             , body: stateCode
-        }
-
-        b.files[requireTarget] = {
-            target: requireTarget
-            , body: requireCode
         }
 
         b.require(input)

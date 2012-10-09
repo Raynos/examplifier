@@ -105,6 +105,19 @@ log("uid2", typeof "foo")
 
 /*
 
+Asynchronous logging works as well
+
+*/
+
+setTimeout(function () {
+    log("3", "totally works")
+    // "totally works"
+}, 10000)
+
+module.exports = {}
+
+/*
+
 That's all really.
 
 Just document your examples however you want. Include snippets with

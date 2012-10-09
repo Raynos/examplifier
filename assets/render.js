@@ -5,6 +5,10 @@ var classList = require("class-list")
     , Element = Fragment.Element
     , unpack = require("unpack-element")
     , walk = require("dom-walk")
+    , state = require("__raw-files__")
+    , extend = require("xtend")
+    , EventEmitter = require("events").EventEmitter
+    , ace = window.ace
 
     , assertionHtml = require("./assertion.html")
 
@@ -15,6 +19,8 @@ var classList = require("class-list")
         , COMBINATION: 3
     }
     , TEXT_NODE = 3
+
+window.require = require
 
 render.RENDER_TYPE = RENDER_TYPE
 render[RENDER_TYPE.COMMENT] = renderComment
@@ -51,11 +57,11 @@ function renderCode(chunk) {
 function renderCombination(chunk) {
     var container = document.createElement("pre")
         , children = []
-        , widget = {
+        , widget = extend(new EventEmitter(), {
             root: container
             , chunk: chunk
             , children: children
-        }
+        })
 
     classList(container).add("combination-container")
     classList(container).add("code-snippet")
@@ -70,6 +76,42 @@ function renderCombination(chunk) {
 
         children.push(widget)
         container.appendChild(root)
+    })
+
+    container.addEventListener("dblclick", function (ev) {
+        //container.style.left = container.offsetLeft + "px"
+        //container.style.top = container.offsetTop + "px"
+        var div = document.createElement("div")
+            , rect = container.getBoundingClientRect()
+            , source = state.src.substring(chunk.range[0], chunk.range[1])
+
+        div.textContent = source
+
+        div.style.width = rect.width + "px"
+        div.style.height = rect.height + "px"
+        div.style.fontSize = "16px"
+
+        container.parentNode.insertBefore(div, container)
+
+        var editor = ace.edit(div)
+            , session = editor.getSession()
+
+        editor.setTheme("ace/theme/monokai")
+        session.setMode("ace/mode/javascript")
+
+        editor.commands.addCommand({
+            name: "save"
+            , bindKey: {
+                win: "Ctrl-S"
+                , mac: "Command-S"
+            }
+            , exec: handleSave
+        })
+
+        function handleSave() {
+            var updatedSource = editor.getValue()
+            widget.emit("source", updatedSource)
+        }
     })
 
     return widget
