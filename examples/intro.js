@@ -20,7 +20,7 @@ turned into a document with introspection tools embedded in it.
 
 This file is generated from [a simple javascript file][1]
 
-To compile a file like that to run with doc-test-client just
+To compile a file like that to run with examplifier just
 
 ```
 $ npm install examplifier

@@ -10,6 +10,10 @@ Turn bland source code into interactive demos
 
 `npm install examplifier`
 
+## Inspiration
+
+ - [doctest.js](https://github.com/ianb/doctestjs)
+
 ## Contributors
 
  - Raynos
