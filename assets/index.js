@@ -5,7 +5,6 @@ var state = require("__raw-files__")
     , EventEmitter = require("events").EventEmitter
     , deepEqual = require("deep-equal")
     , map = require("map-sync")
-    , reload = require("live-reload")(9090)
     , container = document.getElementById("container")
 
     , astUtil = require("../lib/ast")
@@ -16,6 +15,9 @@ var state = require("__raw-files__")
     , ASSERTION = RENDER_TYPE.ASSERTION
     , COMMENT = RENDER_TYPE.COMMENT
 
+if (window.location.host === "localhost:8080") {
+    require("live-reload")(9090)
+}
 
 var assertions = state.assertions = new EventEmitter
 
